@@ -36,10 +36,14 @@
 
 ## ETCD
 
+ETCD is a distributed key-value store used as the primary data store in Kubernetes clusters. It maintains the configuration data, ensuring consistency and reliability across multiple nodes, facilitating coordination among various components.
+
 Setup Kubeadm:
 kubectl get pods -n kube-system
 
 ## KUBE API-SERVER
+
+The Kubernetes API server acts as the control plane's front-end, handling API requests, authentication, and authorization. It validates and processes requests to ensure the desired state of the cluster, interacting with the ETCD store and initiating changes in response to user or controller actions.
 
 Kubernetes Architecture:
 kubectl get nodes
@@ -62,6 +66,8 @@ cat /etc/kubernetes/manifests/kube-apiserver.yaml
 
 ## SCHEDULER
 
+The Kubernetes Scheduler is responsible for assigning work (pods) to nodes based on resource availability, constraints, and policies. It constantly evaluates the cluster state and deploys pods to appropriate nodes, optimizing resource utilization and maintaining high availability.
+
 View scheduler Options :
 cat /etc/kubernetes/manifests/kube-scheduler.yaml
 
@@ -69,6 +75,8 @@ scheduler Running Process:
 ps -aux | grep kube-scheduler 
 
 ## KUBELET
+
+Kubelet is a critical component on each node, ensuring that containers within pods are running and healthy. It communicates with the API server, receives pod specifications, and takes necessary actions to maintain the desired state, such as starting, stopping, or restarting containers.
 
 Setup kubelet (allways install kubelet manually in the worker nodes)
 wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kubelet
@@ -78,6 +86,7 @@ ps -aux | grep Kubelet
 
 ## KUBE-PROXY
 
+Kube-Proxy is responsible for network communication within the cluster. It maintains network rules on nodes, allowing communication between pods and ensuring network connectivity. Kube-Proxy plays a crucial role in service discovery and load balancing.
 
 POD : pod network is an internal virtual network that spans across all the nodes in the cluster to witch all the pods connect to.
 
@@ -97,6 +106,7 @@ kubectl get daemonset -n kube-system
 
 ## PODS
 
+Pods are the fundamental execution units in Kubernetes, representing a group of one or more containers deployed together on a single node. They share the same network namespace and storage, facilitating communication and data sharing. Pods are the smallest deployable units in the Kubernetes object model.
 
 PODS : smallest object you can create in kubernetes.
 
@@ -147,6 +157,8 @@ for creating a pod in a different namespace (for example dev namespace):
 if you want you can move the namespace to the pod-definition.yml under the metadata section.
 
 ## REPLICATION CONTROLLER
+
+The Replication Controller ensures a specified number of replicas of a pod are running at all times. It monitors the state of pods and takes corrective actions, such as creating or terminating pods, to maintain the desired number of instances and ensure application availability and resilience.
 
 Replica Sets : 
 Replica Sets ensure continuous access to an app and its data, even if a pod stops. with Replica Sets (newer version than replication controller) we unsure that if a pod stops, the user will still have access to the app and data.
@@ -225,7 +237,7 @@ or:
 
 ## DEPLOYMENTS
 
-deployments is similar to replicaset but deployments will call a kubernetes objects , named deployment.
+Deployments provide declarative updates to applications, allowing rolling updates and rollbacks. They manage Replica Sets, ensuring that the desired state of the application is maintained. Deployments simplify the process of scaling applications and managing their lifecycle.deployments is similar to replicaset but deployments will call a kubernetes objects , named deployment.
 
 DEFINITION:
 kubectl create -f deployment-definition.yml
@@ -239,7 +251,7 @@ find the image used to create the pod in a new deployment?
 
  ## NAMESPACE
 
-Namespaces provide a way to organize and segregate resources in Kubernetes.
+Namespaces provide a way to organize and segregate resources in Kubernetes.Namespaces provide a way to logically divide cluster resources, allowing multiple users or teams to share a cluster without interference. They offer a scope for names and resource isolation, making it easier to organize and manage Kubernetes objects within a cluster.
 
  Default
 kube-system
@@ -320,7 +332,7 @@ now:
 
  ## SERVICES
 
- services(kubenetes object) enable communication between various components within and outside of the application.helps us connect applications together with other applications or users. 
+Services enable communication between different parts of an application or between applications. They abstract the underlying network details, providing a consistent way to access pods. Services play a crucial role in facilitating connectivity, load balancing, and service discovery within a Kubernetes cluster.helps us connect applications together with other applications or users. 
 
 
 for  example: application services for backend | frontend | database | ...
