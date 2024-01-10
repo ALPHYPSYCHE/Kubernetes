@@ -22,7 +22,7 @@
 
 ## Table of Contents
 
-1. [ETCD](#ETCD)
+1. [ETCD](#etcd)
 2. [KUBE API-SERVER](#kube-api-server)
 3. [SCHEDULER](#scheduler)
 4. [KUBELET](#kubelet)
@@ -33,6 +33,8 @@
 9. [NAMESPACE](#namespace)
 10. [SERVICES](#services)
 11. ...
+
+### LETS START STEP BY STEP.
 
 ## ETCD
 
