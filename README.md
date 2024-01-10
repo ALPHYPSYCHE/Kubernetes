@@ -1,4 +1,17 @@
-## Kubernetes
+<a href="https://github.com/ALPHYPSYCHE/Kubernetes">
+    <div style="margin-bottom:1em;"> 
+        <img style="margin-right:-.2em;" align="left" src="https://cdn.worldvectorlogo.com/logos/kubernets.svg" title="Kubernetes" width="100" height="100"/>
+    </div>
+    <div style="margin-bottom:-1.5em;">
+        <h1 display="display:inline;">
+            <font size="+4">Kubernetes</font>
+        </h1>
+    </div>
+</a>
+
+<div style="margin-left:5em;">
+    <span style="vertical-align: middle;"><font size="+2">Kubernetes, often abbreviated as K8s, is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications. Developed by Google and later donated to the Cloud Native Computing Foundation (CNCF), Kubernetes provides a robust and flexible solution for container orchestration, allowing organizations to efficiently manage complex microservices architectures. At its core, Kubernetes abstracts the underlying infrastructure, enabling seamless deployment and operation of applications across diverse environments. Its key features include automated load balancing, self-healing capabilities, rolling updates, and declarative configuration, empowering developers and system administrators to effectively manage container workloads. Widely adopted in the industry, Kubernetes has become the de facto standard for container orchestration, fostering innovation, scalability, and portability in modern cloud-native application development.</font></span>
+</div>
 
 ## ETCD
 
