@@ -114,5 +114,194 @@ if you want you can move the namespace to the pod-definition.yml under the metad
 
 ## REPLICATION CONTROLLER
 
+Replica Sets : with Replica Sets (newer version than replication controller) we unsure that if a pod stops, the user will still have access to the app and data.
+
+Load Balance & Scaling : if more users come, we app more pods to we dont run out of resources.if we run out of resources in the first node,  we can add another node.
+
+
+so we should make a yaml file [we name it ReplicationController-definition.yml]:
+in template copy and paste metadata & spec from pod yaml to the template of the rc yaml.
+
+apiVersion: v1
+
+kind: ReplicationController
+
+metadata: #[Replication Controller section]
+  name: myapp-rc
+  labels:
+    app: myapp
+    type: front-end
+
+spec: #[Replication Controller section]
+  template:
+    metadata: #[pods section]
+      name: myapp-pod
+      labels:
+        app: myapp
+        costcenter: ALPHY
+        location: USA
+
+    spec: #[pods section]
+      container:
+        - name: ngnix-container
+          image: ngnix
+
+    # you can add more container.
+        - name: backend-container
+          image: redis
+  replicas: 3 # number of replicas
+
+
+
+so [Replication Controller]  is the parrent and [the pod] is the children
+
+create and run the replicas:
+	kubectl create -f ReplicationController-definition.yml
+
+list of replication controller & how many of them are there (number of replicas):
+	kubectl get replicationcontroller
+
+see pods:
+	kubectl get pods
+
+somehow replicaset is a process to monitor pods. 
+so now we make replicaset-definition.yml file
+
+
+selector:  # identify what pods fall under it.  replicaset can manage the pods that are not create as the part of the replicaset.y6
+
+
+for run the replicaset:
+	kubectl create -f replicaset-definition.yml
+
+see replicaset:
+	kubectl get replicaset
+
+if we want 6 replicas, in the yaml file change to replica to 6 . and then run the command:
+	kubectl replace -f replicaset-definition.yml
+
+or use this code instead and use scale for this:
+	kubectl scale --replicas=6 -f replicaset-definition.yml
+
+or:
+				      TYPE	   NAME
+	kubectl scale --replicas=6 replicaset myapp-replicaset
+
+## DEPLOYMENTS
+
+deployments is similar to replicaset but deployments will call a kubernetes objects call deployment.
+
+DEFINITION:
+kubectl create -f deployment-definition.yml
+kubectl get deployments
+kubectl get replicaset
+kubectl get pods
+
+
+find the image used to create the pod in a new deployment?
+	kubectl describe deployments.apps frontend-deployment | grep -i image
+
+ ## NAMESPACE
+
+ Default
+kube-system
+kube-public
+
+
+Example:
+	Default: web-pod | db-service | web-deployment
+	Dev: db-service | web-pod
+
+if we want to connect to internal namespace or outer one:
+	mysql.connect("db-service")
+ 	mysql.connect("db-service.dev.svc.cluster.local")
+
+sevice name:	db-service
+Namespace:	dev
+Service:	svc
+Domain:		cluster.local
+
+
+kubectl get pods --> only shaw pods from default namespace
+kubectl get pods --namespace=kube-system
+
+
+so we make our namespace-dev.yml file:
+
+apiVersion: v1
+kind: Namespace
+metadata:
+	name: dev
+
+create namespace:
+	kubectl create -f namespace-dev.yml
+
+or use this one:
+	kubectl create namespace dev
+
+check:
+	kubectl get pods --namespace=dev
+
+
+use the kube config command to set the namespace in the current context:
+(contexts are used to manage multiple clusters in multiple envirements from the same management system)
+	kubectl config set-context $(kubectl config current-context) --namespace=dev
+
+now you can do this:
+	kubectl get pods
+	kubectl get pods --namespace=default
+	kubectl get pods --namespace=dev
+
+
+to view pods in all namespaces:
+	kubectl get pods --all-namespaces
+
+to limit resources in a namespace, create a resource quota.start with creating definition file: compute-quota.yml
+in the spec section manage your limit for resources.
+
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+	name: compute-auota
+	namespace: dev
+
+spec:
+	hard:
+		pods: "10"
+		requests.cpu:"4"
+		requests.memory: 5 Gi
+		limit.cpu:"10"
+		limit.memory: 10 Gi
+
+now:
+	kubectl create -f compute-quota.yml 
+
+ ## SERVICES
+
+ services(kubenetes object) enable communication between various components within and outside of the application.helps us connect applications together with other applications or users. 
+
+
+for  example: application services for backend | frontend | database | ...
+
+setup example:
+	kubernetes node : 192.168.1.2
+	my laptop in a same network: 192.168.1.10
+	internal pod notwork range: 10.244.0.0
+	the pod ip : 10.244.0.2
+
+you cant access 10.244.0.2 becouse it is in a seperate network.so if we cant to connect to the web application:
+
+	from 192.168.1.10 --> SSH --> curl http://10.244.0.2
+
+services help us map requests to the node from our laptop, through the node, to the pod, running the web container.
+
+NodePortService:
+	listen to port on the node and forward requests on that port, to a port on the pod that running the web application
+
+
+
+
+
+
 
 
