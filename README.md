@@ -134,14 +134,16 @@ if you want you can move the namespace to the pod-definition.yml under the metad
 
 ## REPLICATION CONTROLLER
 
-Replica Sets : Replica Sets ensure continuous access to an app and its data, even if a pod stops. with Replica Sets (newer version than replication controller) we unsure that if a pod stops, the user will still have access to the app and data.
+Replica Sets : 
+Replica Sets ensure continuous access to an app and its data, even if a pod stops. with Replica Sets (newer version than replication controller) we unsure that if a pod stops, the user will still have access to the app and data.
 
-Load Balance & Scaling : if more users come, we app more pods to we dont run out of resources.if we run out of resources in the first node,  we can add another node.
-
+Load Balance & Scaling : 
+if more users come, we app more pods to we dont run out of resources.if we run out of resources in the first node,  we can add another node.
 
 so we should make a yaml file [we name it ReplicationController-definition.yml]:
 in template copy and paste metadata & spec from pod yaml to the template of the rc yaml.
 
+```yaml
 apiVersion: v1
 
 kind: ReplicationController
@@ -170,7 +172,7 @@ spec: #[Replication Controller section]
         - name: backend-container
           image: redis
   replicas: 3 # number of replicas
-
+```
 
 
 so [Replication Controller]  is the parrent and [the pod] is the children
@@ -250,6 +252,7 @@ kubectl get pods --namespace=kube-system
 
 so we make our namespace-dev.yml file:
 
+```yaml
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -263,7 +266,7 @@ or use this one:
 
 check:
 	kubectl get pods --namespace=dev
-
+```
 
 use the kube config command to set the namespace in the current context:
 (contexts are used to manage multiple clusters in multiple envirements from the same management system)
@@ -281,6 +284,7 @@ to view pods in all namespaces:
 to limit resources in a namespace, create a resource quota.start with creating definition file: compute-quota.yml
 in the spec section manage your limit for resources.
 
+```yaml
 apiVersion: v1
 kind: ResourceQuota
 metadata:
@@ -297,6 +301,7 @@ spec:
 
 now:
 	kubectl create -f compute-quota.yml 
+```
 
  ## SERVICES
 
