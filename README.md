@@ -20,7 +20,7 @@
   <img src="https://readme-typing-svg.demolab.com/?lines=Welcome+to+kubernetes+page;Not+completed+yet!;Will+add+more+parts+in+the+future!;Will+complete+soon!&font=Fira%20Code&center=true&width=600&height=50&duration=4000&pause=1000">
 </p>
 
-## Table of Contents
+## 📚 Table of Contents
 
 1. [ETCD](#etcd)
 2. [KUBE API-SERVER](#kube-api-server)
