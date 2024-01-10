@@ -134,7 +134,7 @@ if you want you can move the namespace to the pod-definition.yml under the metad
 
 ## REPLICATION CONTROLLER
 
-Replica Sets : with Replica Sets (newer version than replication controller) we unsure that if a pod stops, the user will still have access to the app and data.
+Replica Sets : Replica Sets ensure continuous access to an app and its data, even if a pod stops. with Replica Sets (newer version than replication controller) we unsure that if a pod stops, the user will still have access to the app and data.
 
 Load Balance & Scaling : if more users come, we app more pods to we dont run out of resources.if we run out of resources in the first node,  we can add another node.
 
@@ -209,7 +209,7 @@ or:
 
 ## DEPLOYMENTS
 
-deployments is similar to replicaset but deployments will call a kubernetes objects call deployment.
+deployments is similar to replicaset but deployments will call a kubernetes objects , named deployment.
 
 DEFINITION:
 kubectl create -f deployment-definition.yml
@@ -222,6 +222,8 @@ find the image used to create the pod in a new deployment?
 	kubectl describe deployments.apps frontend-deployment | grep -i image
 
  ## NAMESPACE
+
+Namespaces provide a way to organize and segregate resources in Kubernetes.
 
  Default
 kube-system
