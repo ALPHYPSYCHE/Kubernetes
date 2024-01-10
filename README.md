@@ -20,6 +20,20 @@
   <img src="https://readme-typing-svg.demolab.com/?lines=Welcome+to+kubernetes+page;Not+completed+yet!;Will+add+more+parts+in+the+future!;Will+complete+soon!&font=Fira%20Code&center=true&width=600&height=50&duration=4000&pause=1000">
 </p>
 
+## Table of Contents
+
+1. [ETCD](#ETCD)
+2. [KUBE API-SERVER](#kube-api-server)
+3. [SCHEDULER](#scheduler)
+4. [KUBELET](#kubelet)
+5. [KUBE-PROXY](#kube-proxy)
+6. [PODS](#pods)
+7. [REPLICATION CONTROLLER](#replication-controller)
+8. [DEPLOYMENTS](#deployments)
+9. [NAMESPACE](#namespace)
+10. [SERVICES](#services)
+11. ...
+
 ## ETCD
 
 Setup Kubeadm:
