@@ -256,7 +256,8 @@ so we make our namespace-dev.yml file:
 apiVersion: v1
 kind: Namespace
 metadata:
-	name: dev
+    name: dev
+```
 
 create namespace:
 	kubectl create -f namespace-dev.yml
@@ -266,7 +267,7 @@ or use this one:
 
 check:
 	kubectl get pods --namespace=dev
-```
+
 
 use the kube config command to set the namespace in the current context:
 (contexts are used to manage multiple clusters in multiple envirements from the same management system)
@@ -288,20 +289,20 @@ in the spec section manage your limit for resources.
 apiVersion: v1
 kind: ResourceQuota
 metadata:
-	name: compute-auota
-	namespace: dev
+    name: compute-auota
+    namespace: dev
 
 spec:
-	hard:
-		pods: "10"
-		requests.cpu:"4"
-		requests.memory: 5 Gi
-		limit.cpu:"10"
-		limit.memory: 10 Gi
-
+    hard:
+        pods: "10"
+        requests.cpu:"4"
+        requests.memory: 5 Gi
+        limit.cpu:"10"
+        limit.memory: 10 Gi
+```
 now:
 	kubectl create -f compute-quota.yml 
-```
+
 
  ## SERVICES
 
