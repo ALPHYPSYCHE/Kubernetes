@@ -15,6 +15,10 @@
     <span style="vertical-align: middle;"><font size="+2">Kubernetes, often abbreviated as K8s, is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications. Developed by Google and later donated to the Cloud Native Computing Foundation (CNCF), Kubernetes provides a robust and flexible solution for container orchestration, allowing organizations to efficiently manage complex microservices architectures. At its core, Kubernetes abstracts the underlying infrastructure, enabling seamless deployment and operation of applications across diverse environments. Its key features include automated load balancing, self-healing capabilities, rolling updates, and declarative configuration, empowering developers and system administrators to effectively manage container workloads. Widely adopted in the industry, Kubernetes has become the de facto standard for container orchestration, fostering innovation, scalability, and portability in modern cloud-native application development.</font></span>
 </div>
 
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com/?lines=Welcome+to+kubernetes+page;Not+completed+yet!;Will+add+more+parrts;Fork+and+star+repositories!&font=Fira%20Code&center=true&width=600&height=50&duration=4000&pause=1000">
+</p>
+
 ## ETCD
 
 Setup Kubeadm:
