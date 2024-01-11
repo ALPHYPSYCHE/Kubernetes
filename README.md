@@ -355,14 +355,13 @@ NodePortService:
 	listen to port on the node and forward requests on that port, to a port on the pod that running the web application
 
 
-
-
-
 Services Types:
-	1.NodePort Service, 2.Cluster IP, 3.Load Balancer
+NodePort Service, Cluster IP, Load Balancer
 
-1.NodePort Service:
- 	listen to port on the node and forward requests on that port, to a port on the pod that running the web application. NodePort Service makese an internal POD accessible on a port on the Node
+### Lets dive into these:
+
+### NodePort Service:
+listen to port on the node and forward requests on that port, to a port on the pod that running the web application. NodePort Service makese an internal POD accessible on a port on the Node
   
  	TargetPort: were the service forwards the requests to. (In this case : POD IP, for example port is 80 & IP is 10.244.0.2)
  	the cluster IP of service: service port is 80 & the IP is 10.106.1.12
@@ -411,10 +410,10 @@ When we create a service without us having to do any additional configuration ku
 this way you can access your application using the IP of any node in the cluster and using the same port number which in this case is 30008 .
 
 
-2.Cluster IP:
+### Cluster IP:
  	the service creates a virtual IP inside the cluster to enable communication between different services. such as a set of front end services to set of back end services.
 	
-3.Load Balancer:
+### Load Balancer:
  	provisions a load balancer for our service in supported cloud provider.like distribute load across the different web services in your front end tier
 
 
