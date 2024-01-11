@@ -411,10 +411,10 @@ this way you can access your application using the IP of any node in the cluster
 
 
 ### Cluster IP:
- 	the service creates a virtual IP inside the cluster to enable communication between different services. such as a set of front end services to set of back end services.
+the service creates a virtual IP inside the cluster to enable communication between different services. such as a set of front end services to set of back end services.
 	
 ### Load Balancer:
- 	provisions a load balancer for our service in supported cloud provider.like distribute load across the different web services in your front end tier
+provisions a load balancer for our service in supported cloud provider.like distribute load across the different web services in your front end tier
 
 
 
