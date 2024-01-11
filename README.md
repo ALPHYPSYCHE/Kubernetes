@@ -432,7 +432,7 @@ spec:
  		port: 80
  		nodePort: 3008
  	selector:
- 		app:my-app
+ 		app: my-app
  		type: front-end
 ```
 
@@ -481,7 +481,7 @@ spec:
  	port: 80
 
   selector:
- 	app:my-app
+ 	app: my-app
  	type: back-end
 ```
 create back-end service:
