@@ -291,6 +291,15 @@ see how many deployments exist on the system:
 ```bash
 kubectl get deployments.
 ```
+Deploy a pod named nginx-pod using the nginx:alpine image
+```bash
+kubectl run nginx-pod --image=nginx:alpine --restart=Never
+```
+Deploy a redis pod  using the redis:alpine image with labels set to tier=db.
+```bash
+kubectl run redis --image=redis:alpine --restart=Never --labels=tier=db
+kubectl get pod redis --show-labels
+```
 
  ## NAMESPACE
 
@@ -500,6 +509,13 @@ see targetPort/labels/... configured on the kubernetes service:
 ```bash
 kubectl describe svc kubernetes
 ```
+Lets creat a service: redis-service to expose the redis application whitin the cluster on port 6379
+```bash
+kubectl expose pod redis --name=redis-service --port=6379 --targe-tport=6379
+kubectl describe svc redis-service
+```
+
+
 ### Load Balancer:
 provisions a load balancer for our service in supported cloud provider.like distribute load across the different web services in your front end tier
 
