@@ -140,12 +140,20 @@ For run the helper: (will create/die with container --> we should monitor the st
 	docker run helper -link app3
 
 kubectl:
-	kubectl run nginx --image nginx --> will create a pod automaticly & make instance of nginx ducker image
-	kube get pods --> list of pods available in our cluster
-	kube describe pod myapp-pod  --> information about the pod
-
+create a pod automaticly & make instance of nginx ducker image
+```bash
+kubectl run nginx --image nginx
+  ```
+list of pods available in our cluster
+```bash
+kube get pods
+```
+information about the pod
+```bash
+kube describe pod myapp-pod 
+```
 Creat pod with YAML file: 
-	kubernetes use yaml as inputs to create objects like pods, replica, services,...
+kubernetes use yaml as inputs to create objects like pods, replica, services,...
 
 example: pod-definition.yml	
 you must have these:
@@ -244,17 +252,21 @@ selector:  # identify what pods fall under it.  replicaset can manage the pods t
 
 
 for run the replicaset:
-	kubectl create -f replicaset-definition.yml
-
+```bash
+kubectl create -f replicaset-definition.yml
+```
 see replicaset:
-	kubectl get replicaset
-
+```bash
+kubectl get replicaset
+```
 if we want 6 replicas, in the yaml file change to replica to 6 . and then run the command:
-	kubectl replace -f replicaset-definition.yml
-
+```bash
+kubectl replace -f replicaset-definition.yml
+```
 or use this code instead and use scale for this:
-	kubectl scale --replicas=6 -f replicaset-definition.yml
-
+```bash
+kubectl scale --replicas=6 -f replicaset-definition.yml
+```
 or:
 				      TYPE	   NAME
 	kubectl scale --replicas=6 replicaset myapp-replicaset
@@ -264,17 +276,21 @@ or:
 Deployments provide declarative updates to applications, allowing rolling updates and rollbacks. They manage Replica Sets, ensuring that the desired state of the application is maintained. Deployments simplify the process of scaling applications and managing their lifecycle.deployments is similar to replicaset but deployments will call a kubernetes objects , named deployment.
 
 DEFINITION:
+```bash
 kubectl create -f deployment-definition.yml
 kubectl get deployments
 kubectl get replicaset
 kubectl get pods
-
+```
 
 find the image used to create the pod in a new deployment?
-	kubectl describe deployments.apps frontend-deployment | grep -i image
-
+```bash
+kubectl describe deployments.apps frontend-deployment | grep -i image
+```
 see how many deployments exist on the system:
-	kubectl get deployments.
+```bash
+kubectl get deployments.
+```
 
  ## NAMESPACE
 
@@ -298,10 +314,10 @@ Namespace:	dev
 Service:	svc
 Domain:		cluster.local
 
-
-kubectl get pods --> only shaw pods from default namespace
+```bash
+kubectl get pods // only shaw pods from default namespace
 kubectl get pods --namespace=kube-system
-
+```
 
 so we make our namespace-dev.yml file:
 
@@ -313,28 +329,33 @@ metadata:
 ```
 
 create namespace:
-	kubectl create -f namespace-dev.yml
-
+```bash
+kubectl create -f namespace-dev.yml
+```
 or use this one:
-	kubectl create namespace dev
-
+```bash
+kubectl create namespace dev
+```
 check:
-	kubectl get pods --namespace=dev
-
+```bash
+kubectl get pods --namespace=dev
+```
 
 use the kube config command to set the namespace in the current context:
 (contexts are used to manage multiple clusters in multiple envirements from the same management system)
 	kubectl config set-context $(kubectl config current-context) --namespace=dev
 
 now you can do this:
-	kubectl get pods
-	kubectl get pods --namespace=default
-	kubectl get pods --namespace=dev
-
+```bash
+kubectl get pods
+kubectl get pods --namespace=default
+kubectl get pods --namespace=dev
+```
 
 to view pods in all namespaces:
-	kubectl get pods --all-namespaces
-
+```bash
+kubectl get pods --all-namespaces
+```
 to limit resources in a namespace, create a resource quota.start with creating definition file: compute-quota.yml
 in the spec section manage your limit for resources.
 
@@ -418,13 +439,17 @@ spec:
 if you dont provide a target port, its assumed to be the same as port. if you dont provide a  node port, a free port in athe valid range is automatically allocated. 
 		
 create myapp-service:
- 	kubectl creat -f server-definition.yml
-
+```bash
+kubectl creat -f server-definition.yml
+```
 see the created service:
- 	kubectl get services
-
+```bash
+kubectl get services
+```
 use the port to access the web service:
- 	curl http://192.168.1.2:30008
+```bash
+curl http://192.168.1.2:30008
+```
 
 what do you do when you have multiple PODs? In a production environment? You have multiple instances of your web application running for high availability and load balancing purposes in this case.
 We have multiple similar pods running our web application they all have the same labels with a key app and set to a value of my app the same label is used as a selector during the creation of the service.
@@ -460,17 +485,21 @@ spec:
  	type: back-end
 ```
 create back-end service:
- 	kubectl creat -f server-definition.yml
-
+```bash
+kubectl creat -f server-definition.yml
+```
 see the created service:
- 	kubectl get services
-
+```bash
+kubectl get services
+```
 see how many services exist / service type:
- 	kubectl get svc
-
+```bash
+kubectl get svc
+```
 see targetPort/labels/... configured on the kubernetes service:
- 	kubectl describe svc kubernetes
-
+```bash
+kubectl describe svc kubernetes
+```
 ### Load Balancer:
 provisions a load balancer for our service in supported cloud provider.like distribute load across the different web services in your front end tier
 
