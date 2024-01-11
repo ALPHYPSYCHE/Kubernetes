@@ -300,6 +300,11 @@ Deploy a redis pod  using the redis:alpine image with labels set to tier=db.
 kubectl run redis --image=redis:alpine --restart=Never --labels=tier=db
 kubectl get pod redis --show-labels
 ```
+create a deployment named webapp using the image kodekloud/webapp-color with 3 replicas
+```bash
+kubectl create deployment webapp --image=kodekloud/webapp-color
+kubectl scale deployment webapp --replicas=3
+```
 
  ## NAMESPACE
 
