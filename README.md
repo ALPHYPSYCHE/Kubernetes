@@ -251,6 +251,9 @@ kubectl get pods
 find the image used to create the pod in a new deployment?
 	kubectl describe deployments.apps frontend-deployment | grep -i image
 
+see how many deployments exist on the system:
+	kubectl get deployments.
+
  ## NAMESPACE
 
 Namespaces provide a way to organize and segregate resources in Kubernetes.Namespaces provide a way to logically divide cluster resources, allowing multiple users or teams to share a cluster without interference. They offer a scope for names and resource isolation, making it easier to organize and manage Kubernetes objects within a cluster.
@@ -412,7 +415,40 @@ this way you can access your application using the IP of any node in the cluster
 
 ### Cluster IP:
 the service creates a virtual IP inside the cluster to enable communication between different services. such as a set of front end services to set of back end services.
-	
+The pods all have an IP address assigned to them as we can see on the screen but these IP as we know are not static.These pods can go down any time and new pods are created all the time.
+you cannot rely on these IP addresses for internal communication between the application.A kubernetes service can help us group these PODs together and provide a single interface to access the PODs in a group. 
+For example a service created for the backend PODs will help group all the backend PODs together and provide a single interface for other PODs to access this service.
+
+lets create service-definition.yml file:
+
+```yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: back-end
+
+spec:
+  type: ClusterIP // is the port where the back-end is exposed
+  ports:
+ 	- targetPort: 80
+ 	port: 80
+
+  selector:
+ 	app:my-app
+ 	type: back-end
+```
+create back-end service:
+ 	kubectl creat -f server-definition.yml
+
+see the created service:
+ 	kubectl get services
+
+see how many services exist / service type:
+ 	kubectl get svc
+
+see targetPort/labels/... configured on the kubernetes service:
+ 	kubectl describe svc kubernetes
+
 ### Load Balancer:
 provisions a load balancer for our service in supported cloud provider.like distribute load across the different web services in your front end tier
 
