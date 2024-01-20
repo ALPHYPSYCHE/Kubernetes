@@ -25,14 +25,15 @@
 1. [ETCD](#etcd)
 2. [KUBE API-SERVER](#kube-api-server)
 3. [SCHEDULER](#scheduler)
-4. [KUBELET](#kubelet)
-5. [KUBE-PROXY](#kube-proxy)
-6. [PODS](#pods)
-7. [REPLICATION CONTROLLER](#replication-controller)
-8. [DEPLOYMENTS](#deployments)
-9. [NAMESPACE](#namespace)
-10. [SERVICES](#services)
-11. ...
+4. [SCHEDULING](#scheduling)
+5. [KUBELET](#kubelet)
+6. [KUBE-PROXY](#kube-proxy)
+7. [PODS](#pods)
+8. [REPLICATION CONTROLLER](#replication-controller)
+9. [DEPLOYMENTS](#deployments)
+10. [NAMESPACE](#namespace)
+11. [SERVICES](#services)
+12. ...
 
 ### LETS START STEP BY STEP.
 
@@ -84,6 +85,52 @@ scheduler Running Process:
 ```bash
 ps -aux | grep kube-scheduler 
 ```
+
+## SCHEDULING
+
+
+in pod-definition.yml under spec, every pod has a field called "nodeName" thay by default is not set.
+
+```bash
+apiVersion: v1
+kind: pod
+metadata:
+  name: nginx
+  labels:
+    name:nginx
+
+spec:
+	containers:
+	- name:nginx
+	image: nginx
+	ports:
+	- containerPort: 8080
+
+	nodeName: node02
+```
+
+the scheduler goes through all the pods & looks for those that do not have this property set. those are the candidates for scheduling.
+if there is no scheduler to monitor & schedule nodes, the pods status continue to be in a pending state. you can manually assign pods to node with "nodeName".you must do this at the creation time of the pod.
+if the pod is existingyou must create binding object & send a post request to the pod binding API & set the binding object in a JSON format. we creat Pod-binding-definition.yaml
+
+```bash
+apiVersion: v1
+kind: binding
+metadata:
+  name: nginx
+target:
+  apiVersion: v1
+  kind: Node
+  name: node02
+```
+
+then send a post request to the pod binding API:
+
+```bash
+curl --header "Content-Type:application/json" --request POST --data  '{"application":"v1","kind":"Binding", ....}
+http://$SERVER/api/v1/namespaces/default/pods/$PODNAME/binding/
+```
+you must convert the YAML file into its equivalent JSON format.
 
 ## KUBELET
 
