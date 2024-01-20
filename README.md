@@ -42,7 +42,9 @@
 ETCD is a distributed key-value store used as the primary data store in Kubernetes clusters. It maintains the configuration data, ensuring consistency and reliability across multiple nodes, facilitating coordination among various components.
 
 Setup Kubeadm:
+```bash
 kubectl get pods -n kube-system
+```
 
 ## KUBE API-SERVER
 
