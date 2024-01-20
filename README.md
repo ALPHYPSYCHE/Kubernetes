@@ -100,13 +100,13 @@ metadata:
     name:nginx
 
 spec:
-	containers:
-	- name:nginx
-	image: nginx
-	ports:
-	- containerPort: 8080
+  containers:
+  - name:nginx
+  image: nginx
+  ports:
+  - containerPort: 8080
 
-	nodeName: node02
+  nodeName: node02
 ```
 
 the scheduler goes through all the pods & looks for those that do not have this property set. those are the candidates for scheduling.
